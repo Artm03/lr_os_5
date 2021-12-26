@@ -1,0 +1,21 @@
+CC=gcc
+
+all: lr5_2
+
+lr5_2: lr5_2.o lib2.so lib1.so
+	$(CC) lr5_2.o -Wl,-rpath,. -ldl -lm -o lr5_2
+	
+lib1.so: lib.o
+	$(CC) -shared -o lib1.so lib.o -lm
+lib2.so: lib1.o
+	$(CC) -shared -o lib2.so lib1.o -lm
+
+lr5_2.o: lr5_2.c
+	$(CC) -c lr5_2.c -lm
+
+lib.o: lib.c
+	$(CC) -fPIC -c lib.c -lm
+	
+lib1.o: lib1.c
+	$(CC) -fPIC -c lib1.c -lm
+
