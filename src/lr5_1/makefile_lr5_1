@@ -1,0 +1,14 @@
+CC=gcc
+
+all: lr5_1.out
+
+lr5_1.out: lr5_1.c lib1.so 
+	$(CC) lr5_1.c -L. -Wl,-R. -l1 -o lr5_1.out
+
+lib2.so: lib1.c
+	$(CC) -shared lib1.c -o lib2.so  -lm
+	
+lib1.so: lib.c
+	$(CC) -shared lib.c -o lib1.so  -lm
+	
+	
